@@ -31,5 +31,17 @@ StatelessWidget digunakan untuk tampilan statis yang tidak berubah, sedangkan St
 
 BuildContext adalah objek yang merepresentasikan posisi widget dalam widget tree dan digunakan untuk mengakses informasi lingkungan seperti tema, ukuran layar, atau navigasi. Dalam metode build, context penting karena memungkinkan widget berinteraksi dengan widget lain dan mengambil data dari hierarki aplikasi.
 
-“Hot reload” memungkinkan pengembang melihat perubahan kode secara langsung tanpa kehilangan state aplikasi, sedangkan “hot restart” memuat ulang seluruh aplikasi dari awal dan menghapus state yang ada. Hot reload ideal untuk mempercepat pengembangan tampilan, sementara hot restart digunakan jika ada perubahan besar pada struktur aplikasi.
+"Hot reload" memungkinkan pengembang melihat perubahan kode secara langsung tanpa kehilangan state aplikasi, sedangkan "hot restart" memuat ulang seluruh aplikasi dari awal dan menghapus state yang ada. Hot reload ideal untuk mempercepat pengembangan tampilan, sementara hot restart digunakan jika ada perubahan besar pada struktur aplikasi.
+</details>
+
+<details>
+<summary>Tugas Individu 7</summary>
+
+Navigator.push() digunakan untuk menambahkan halaman baru di atas halaman saat ini, sehingga pengguna masih bisa kembali ke halaman sebelumnya dengan tombol back. Sedangkan Navigator.pushReplacement() menggantikan halaman yang sedang aktif dengan halaman baru, sehingga pengguna tidak bisa kembali ke halaman sebelumnya. Dalam aplikasi Football Shop, Navigator.push() digunakan untuk berpindah dari halaman utama ke form tambah produk agar pengguna bisa kembali ke menu utama setelah selesai. Sementara itu, Navigator.pushReplacement() digunakan pada navigasi dari Left Drawer untuk berpindah ke halaman utama tanpa menumpuk halaman sebelumnya, sehingga alur navigasi menjadi lebih efisien.
+
+Scaffold berfungsi sebagai kerangka utama setiap halaman untuk menampung elemen-elemen seperti konten utama, tombol, dan drawer. AppBar menampilkan judul halaman seperti "Football Shop" agar pengguna selalu tahu konteks halaman yang sedang dibuka. Drawer digunakan sebagai navigasi samping yang berisi tombol menuju halaman utama dan form tambah produk, sehingga memudahkan pengguna berpindah antarhalaman tanpa kehilangan konsistensi tampilan.
+
+Layout widget seperti Padding, SingleChildScrollView, dan ListView membantu menjaga tampilan elemen form agar tetap rapi, responsif, dan nyaman digunakan di berbagai ukuran layar. Padding digunakan untuk memberi jarak antar elemen agar tampilan form tidak terlalu rapat, SingleChildScrollView memastikan seluruh isi form tetap bisa digulir ketika kontennya panjang atau keyboard muncul, sedangkan ListView mempermudah penyusunan banyak elemen form secara vertikal tanpa overflow. Dalam aplikasi Football Shop, kombinasi Padding dan SingleChildScrollView digunakan di productlist_form.dart, serta ListView digunakan di left_drawer.dart untuk menampilkan input form produk dengan tata letak yang bersih dan mudah diakses.
+
+Aplikasi Football Shop memiliki identitas visual yang konsisten dengan menggunakan ThemeData di MaterialApp, di mana ColorScheme diatur menggunakan primarySwatch: Colors.green dan secondary: Colors.greenAccent[400]. Penggunaan Theme.of(context).colorScheme.primary memastikan bahwa elemen seperti latar belakang, tombol, dan teks utama mengikuti palet warna yang sama, sehingga tampilan aplikasi terlihat seragam di seluruh halaman.
 </details>
