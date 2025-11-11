@@ -35,7 +35,7 @@ BuildContext adalah objek yang merepresentasikan posisi widget dalam widget tree
 </details>
 
 <details>
-<summary>Tugas Individu 7</summary>
+<summary>Tugas Individu 8</summary>
 
 Navigator.push() digunakan untuk menambahkan halaman baru di atas halaman saat ini, sehingga pengguna masih bisa kembali ke halaman sebelumnya dengan tombol back. Sedangkan Navigator.pushReplacement() menggantikan halaman yang sedang aktif dengan halaman baru, sehingga pengguna tidak bisa kembali ke halaman sebelumnya. Dalam aplikasi Football Shop, Navigator.push() digunakan untuk berpindah dari halaman utama ke form tambah produk agar pengguna bisa kembali ke menu utama setelah selesai. Sementara itu, Navigator.pushReplacement() digunakan pada navigasi dari Left Drawer untuk berpindah ke halaman utama tanpa menumpuk halaman sebelumnya, sehingga alur navigasi menjadi lebih efisien.
 
