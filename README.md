@@ -45,3 +45,30 @@ Layout widget seperti Padding, SingleChildScrollView, dan ListView membantu menj
 
 Aplikasi Football Shop memiliki identitas visual yang konsisten dengan menggunakan ThemeData di MaterialApp, di mana ColorScheme diatur menggunakan primarySwatch: Colors.green dan secondary: Colors.greenAccent[400]. Penggunaan Theme.of(context).colorScheme.primary memastikan bahwa elemen seperti latar belakang, tombol, dan teks utama mengikuti palet warna yang sama, sehingga tampilan aplikasi terlihat seragam di seluruh halaman.
 </details>
+
+<details>
+<summary>Tugas Individu 9</summary>
+
+Model Dart diperlukan agar data JSON yang diterima atau dikirim memiliki struktur yang jelas, terdefinisi, dan aman dari kesalahan tipe. Jika kita langsung memakai Map<String, dynamic> tanpa model, maka kita kehilangan validasi tipe, rawan null-safety error, dan kode menjadi sulit dirawat karena kita harus menebak key JSON dan melakukan cast manual berulang kali. Dengan model, kita mendapatkan kode yang lebih aman, mudah dikelola, terprediksi, dan mudah diperbarui ketika struktur JSON berubah, sehingga aplikasi lebih maintainable dalam jangka panjang.
+
+Package http digunakan untuk melakukan request HTTP sederhana seperti GET atau POST tanpa penyimpanan sesi, cocok untuk komunikasi stateless. Sedangkan CookieRequest (dari pbp_django_auth) memiliki kemampuan tambahan untuk menyimpan dan mengelola cookie session Django, sehingga dapat mempertahankan status login pengguna.
+
+Karena CookieRequest menyimpan session cookie yang dipakai Django untuk mengenali pengguna, instance ini harus tetap satu dan konsisten di seluruh aplikasi. Jika setiap halaman membuat instance CookieRequest baru, maka session login akan hilang sehingga Django akan menganggap pengguna belum login. Dengan membagikan instance melalui Provider, semua halaman berbagi sesi yang sama sehingga status autentikasi tetap terjaga dan interaksi dengan backend tetap konsisten.
+
+Flutter yang berjalan di Android emulator menggunakan alamat 10.0.2.2 untuk mengakses localhost di komputer host, sehingga alamat ini harus ditambahkan ke ALLOWED_HOSTS Django agar request tidak ditolak. CORS perlu diaktifkan agar Django mengizinkan permintaan dari domain berbeda (yaitu aplikasi Flutter). Pengaturan cookie seperti SameSite=None dan Secure diperlukan agar session cookie dapat dikirim dari Flutter ke Django. Selain itu, Flutter perlu diberi izin akses internet di AndroidManifest. Jika konfigurasi ini tidak dilakukan, permintaan jaringan akan gagal, cookie login tidak tersimpan, dan aplikasi tidak dapat berkomunikasi dengan backend sama sekali.
+
+Proses dimulai ketika pengguna mengisi form pada Flutter. Data tersebut dikumpulkan dari TextEditingController atau widget form lainnya, kemudian diubah menjadi JSON dan dikirim ke endpoint Django melalui CookieRequest atau http. Django menerima request, memprosesnya (misalnya menyimpan data ke database), dan mengembalikan response berupa JSON. Flutter menerima JSON tersebut, mem-parsing-nya ke model Dart, lalu menampilkannya kembali dalam UI seperti daftar produk atau halaman detail.
+
+Pada proses login atau register, Flutter mengirim data akun (username, password, dan lainnya) melalui CookieRequest. Django kemudian memvalidasi data tersebut menggunakan sistem autentikasinya; jika valid, Django mengembalikan session cookie ke Flutter yang kemudian disimpan oleh CookieRequest. Selama cookie ini aktif, Flutter dapat mengakses endpoint yang membutuhkan autentikasi. Saat logout, Flutter mengirim request ke endpoint logout Django, dan Django menghapus session di server. Flutter lalu menghapus session lokal, dan aplikasi kembali ke menu awal atau halaman login.
+
+Langkah-langkah yang saya lakukan untuk mengimplementasikan checklist di atas adalah:
+1. Mendownload library yang diperlukan, django-cors-headers di django, provider, pbp_django_auth, dan http di flutter.
+2. Membuat app baru di projek Django bernama authentication
+3. Mengatur settings.py untuk mengakomodasi flutter.
+4. Membuat fungsi login, register, dan logout di django.
+5. Membuat fungsi proxy image, create product, dan get my product di django.
+6. Membuat file dart untuk login dan register.
+7. Membuat halaman baru untuk menampilkan daftar produk.
+8. Membuat halaman baru untuk menampilkan detail produk.
+8. Mengubah model agar memiliki variabel boolean untuk keperluan filter.
+</details>
